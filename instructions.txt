@@ -32,4 +32,5 @@ docker-compose up -d
 podman ps
 firefox http://localhost:3000 &
 podman generate kube -s -f gitea.yaml <ID-1> <ID-2>
+vim gitea.yaml
 docker-compose down
