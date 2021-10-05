@@ -7,7 +7,7 @@ podman --version
 2. Build Containers
 
 podman ps
-cd ~/dev/podman-demo/flask
+cd ./flask
 vim Dockerfile
 podman build -t hello-world:3.8 .
 podman run -d --rm --name test-container -p 5000:5000 hello-world:3.8
@@ -21,7 +21,7 @@ podman push quay.io/mmurakam/hello-world:3.8
 
 3. Run Compose Files
 
-cd ~/dev/podman-demo/gitea-postgres
+cd ../gitea-postgres
 vim docker-compose.yaml
 curl localhost:3000
 podman ps
