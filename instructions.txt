@@ -1,0 +1,35 @@
+1. Install Podman
+
+yum module list container-tools
+sudo yum module install container-tools
+podman --version
+
+2. Build Containers
+
+podman ps
+cd ~/dev/podman-demo/flask
+vim Dockerfile
+podman build -t hello-world:3.8 .
+podman run -d --rm --name test-container -p 5000:5000 hello-world:3.8
+podman ps
+curl localhost:5000
+podman stop test-container
+podman ps
+podman login quay.io
+podman tag hello-world:3.8 quay.io/mmurakam/hello-world:3.8
+podman push quay.io/mmurakam/hello-world:3.8
+
+3. Run Compose Files
+
+cd ~/dev/podman-demo/gitea-postgres
+vim docker-compose.yaml
+curl localhost:3000
+podman ps
+systemctl --user enable --now podman.socket
+systemctl status --user podman.socket
+export DOCKER_HOST=unix:///run/user/1000/podman//podman.sock
+docker-compose up -d
+podman ps
+firefox http://localhost:3000 &
+podman generate kube -s -f gitea.yaml <ID-1> <ID-2>
+docker-compose down
